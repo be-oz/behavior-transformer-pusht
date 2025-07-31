@@ -10,7 +10,7 @@ from tqdm import tqdm
 import random
 
 # --- Config ---
-D_INPUT = 2            # (x, y) agent position
+D_INPUT = 2
 D_MODEL = 64
 NHEAD = 2
 NUM_LAYERS = 1
@@ -31,7 +31,7 @@ def generate_synthetic_dataset(n_episodes=DATASET_SIZE):
         residual = np.random.normal(0, 0.05, size=(T, 2)).astype(np.float32)  # Residual is 2D
         data.append({"obs": obs, "action_bin": action_bin, "residual": residual})
     np.save("transformer_dataset.npy", data)
-    print(f"✅ Generated {len(data)} episodes of synthetic data.")
+    print(f"Generated {len(data)} episodes of synthetic data.")
 
 # --- Dataset ---
 class PushTDataset(Dataset):
@@ -65,12 +65,12 @@ class FastTransformer(nn.Module):
         self.transformer = nn.TransformerEncoder(encoder, num_layers=NUM_LAYERS)
         self.norm = nn.LayerNorm(D_MODEL)
         self.cls_head = nn.Linear(D_MODEL, NUM_BINS)
-        self.reg_head = nn.Linear(D_MODEL, 2)  # Output is 2D (for action residual)
+        self.reg_head = nn.Linear(D_MODEL, 2)
 
     def forward(self, x):
-        x = self.embed(x.unsqueeze(1))      # Shape: (B, 1, D_MODEL)
+        x = self.embed(x.unsqueeze(1))
         x = self.transformer(x)
-        x = self.norm(x.squeeze(1))         # Shape: (B, D_MODEL)
+        x = self.norm(x.squeeze(1))
         return self.cls_head(x), self.reg_head(x)
 
 # --- Training ---
@@ -94,10 +94,10 @@ def train():
             opt.zero_grad(); loss.backward(); opt.step()
             cls_total += loss_cls(out_cls, b).item() * len(x)
             reg_total += loss_reg(out_reg, r).item() * len(x)
-        print(f"📊 Epoch {epoch+1} | Cls Loss: {cls_total/len(dataset):.4f} | Reg Loss: {reg_total/len(dataset):.4f}")
+        print(f"Epoch {epoch+1} | Cls Loss: {cls_total/len(dataset):.4f} | Reg Loss: {reg_total/len(dataset):.4f}")
 
     torch.save(model.state_dict(), MODEL_PATH)
-    print(f"✅ Saved model to {MODEL_PATH}")
+    print(f"Saved model to {MODEL_PATH}")
 
 # --- Run both ---
 if __name__ == "__main__":

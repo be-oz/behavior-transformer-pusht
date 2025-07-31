@@ -51,4 +51,4 @@ for ep in trange(NUM_EPISODES, desc="Collecting expert trajectories"):
 # ---- Save ----
 os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)
 np.save(SAVE_PATH, expert_trajectories)
-print(f"✅ Saved {NUM_EPISODES} expert episodes to {SAVE_PATH}")
+print(f"Saved {NUM_EPISODES} expert episodes to {SAVE_PATH}")

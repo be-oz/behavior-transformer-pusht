@@ -11,4 +11,4 @@ plt.ylabel("Y Position")
 plt.grid(True)
 
 plt.savefig("outputs/expert_trajectory_ep0.png")
-print("✅ Saved trajectory plot to outputs/expert_trajectory_ep0.png")
+print("Saved trajectory plot to outputs/expert_trajectory_ep0.png")

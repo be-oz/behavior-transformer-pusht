@@ -5,7 +5,7 @@ OUTPUT_PATH = "transformer_dataset.npy"
 
 def convert():
     raw_trajectories = np.load(INPUT_PATH, allow_pickle=True)
-    print(f"📦 Loaded {len(raw_trajectories)} expert trajectories.")
+    print(f"Loaded {len(raw_trajectories)} expert trajectories.")
 
     formatted_data = []
     for traj in raw_trajectories:
@@ -19,7 +19,7 @@ def convert():
         })
 
     np.save(OUTPUT_PATH, formatted_data)
-    print(f"✅ Saved processed dataset to {OUTPUT_PATH}")
+    print(f"Saved processed dataset to {OUTPUT_PATH}")
 
 if __name__ == "__main__":
     convert()

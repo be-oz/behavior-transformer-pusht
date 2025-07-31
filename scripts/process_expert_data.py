@@ -30,7 +30,7 @@ all_obs = np.array(all_obs)
 kmeans = KMeans(n_clusters=N_CLUSTERS, random_state=42).fit(all_actions)
 codebook = torch.tensor(kmeans.cluster_centers_, dtype=torch.float32)
 torch.save(codebook, CODEBOOK_PATH)
-print(f"✅ Saved KMeans action codebook to {CODEBOOK_PATH}")
+print(f"Saved KMeans action codebook to {CODEBOOK_PATH}")
 
 # --- Build training dataset with bins + residuals ---
 dataset = []
@@ -53,4 +53,4 @@ for episode in expert_episodes:
     })
 
 np.save(OUTPUT_DATASET, dataset)
-print(f"✅ Saved processed dataset to {OUTPUT_DATASET} with {i} steps.")
+print(f"Saved processed dataset to {OUTPUT_DATASET} with {i} steps.")

@@ -4,8 +4,7 @@ Collect expert demonstrations from the PushT-v0 environment and process them
 into a behavior cloning dataset by computing discrete action bins (via KMeans)
 and fine-grained residuals.
 
-Author: Your Name
-Date: 2025-07-31
+Author: Berke Özmen
 """
 
 import os
@@ -56,7 +55,7 @@ for ep in range(NUM_EPISODES):
         obs, _, terminated, truncated, _ = env.step(expert_action)
         done = terminated or truncated
 
-    print(f"✓ Episode {ep + 1}/{NUM_EPISODES} collected")
+    print(f"Episode {ep + 1}/{NUM_EPISODES} collected")
 
 obs_array = np.array(obs_list, dtype=np.float32)          # shape: (N, 2)
 action_array = np.array(action_list, dtype=np.float32)    # shape: (N, 2)

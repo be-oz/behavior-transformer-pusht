@@ -32,7 +32,7 @@ def generate_synthetic_dataset(n_episodes=DATASET_SIZE):
         residual = np.random.normal(0, 0.05, size=(T, 4)).astype(np.float32)
         data.append({"obs": obs, "action_bin": action_bin, "residual": residual})
     np.save("transformer_dataset.npy", data)
-    print(f"✅ Generated {len(data)} episodes of synthetic data.")
+    print(f"Generated {len(data)} episodes of synthetic data.")
 
 
 # --- Dataset ---
@@ -98,12 +98,12 @@ def train():
             opt.zero_grad(); loss.backward(); opt.step()
             cls_total += loss_cls(out_cls, b).item() * len(x)
             reg_total += loss_reg(out_reg, r).item() * len(x)
-        print(f"📊 Epoch {epoch+1} | Cls Loss: {cls_total/len(dataset):.4f} | Reg Loss: {reg_total/len(dataset):.4f}")
+        print(f"Epoch {epoch+1} | Cls Loss: {cls_total/len(dataset):.4f} | Reg Loss: {reg_total/len(dataset):.4f}")
     torch.save(model.state_dict(), MODEL_PATH)
-    print(f"✅ Saved model to {MODEL_PATH}")
+    print(f"Saved model to {MODEL_PATH}")
 
 
-# --- Run both ---
+
 if __name__ == "__main__":
     generate_synthetic_dataset()
     train()
